@@ -1,9 +1,10 @@
 package com.company;
 
-public class Triangle extends Figure{
+public class Triangle extends Figure implements Printable {
     private double a, b, c;
 
     public Triangle() {
+        this.Type="Triangle";
         this.a = 0;
         this.b = 0;
         this.c = 0;
@@ -11,13 +12,18 @@ public class Triangle extends Figure{
 
     public Triangle(double a, double b, double c)
     {
-        if(a<=0 || b<=0 || c<=0 || a+b<=c || a+c<=b || b+c<=a) throw new IllegalArgumentException("Fail to create Triangle");
+        if(a<=0 || b<=0 || c<=0 || a+b<=c || a+c<=b || b+c<=a) throw new IllegalArgumentException("Fail to create a Triangle");
+        this.Type="Triangle";
         this.a=a;
         this.b=b;
         this.c=c;
 
     }
 
+    @Override
+    public String getType() {
+        return this.Type;
+    }
 
 
     public double getA() {
@@ -44,12 +50,31 @@ public class Triangle extends Figure{
         this.c = c;
     }
 
-    double calculatePerimeter(){
+    @Override
+    public double calculatePerimeter(){
         return this.a+this.b+this.c;
     }
 
-    double calculateArea(){
+    @Override
+    public double calculateArea(){
         double p = (this.a+this.b+this.c)/2;
         return Math.sqrt(p*(p-this.a)*(p-this.b)*(p-this.c));
+    }
+
+    @Override
+    public void print() {
+        System.out.print("Triangle sides: ");
+        System.out.print(getA());
+        System.out.print(" ");
+        System.out.print(getB());
+        System.out.print(" ");
+        System.out.print(getC());
+        System.out.print(" \n");
+        System.out.print("Triangle Area: ");
+        System.out.print(calculateArea());
+        System.out.print("\n");
+        System.out.print("Triangle Perimeter: ");
+        System.out.print(calculatePerimeter());
+        System.out.print("\n");
     }
 }
